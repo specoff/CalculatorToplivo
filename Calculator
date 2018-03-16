@@ -1,0 +1,181 @@
+<h2 class="mt20">Расчет среднего расхода топлива</h2>
+<p>Чтобы разобраться в том, какой действительно средний расход вашего авто, укажите, пожалуйста, сколько литров топлива вы заправили в автомобиль и сколько километров проехали.</p>
+
+<script type="text/javascript">
+function Poezdka()
+{
+	var a=document.getElementById('poezdka_put').value;
+	a=parseFloat(a.replace(/,/,".")) 
+	var b=document.getElementById('poezdka_rashod').value;
+	b=parseFloat(b.replace(/,/,"."))
+	var c=document.getElementById('poezdka_cena').value;
+	c=parseFloat(c.replace(/,/,"."))
+	var s=a*(b/100);
+	var f=s*c;
+	document.getElementById('poezdka_topliva').value=s.toFixed(0);
+	document.getElementById('poezdka_deneg').value=f.toFixed(0);
+}
+
+
+function Rashod()
+{
+	var rash_topl=document.getElementById('rash_topl').value.replace(/,/, ".");
+	var rash_km=document.getElementById('rash_km').value.replace(/,/, ".");
+	var rashod_itog='';
+
+	if (rash_topl && rash_km)
+		rash_itog='Расход топлива вашего авто составляет <b>'+((rash_topl/rash_km*100).toString().substring(0,5))+'</b> литров на 100 км.';
+	document.getElementById('rashod_itog').innerHTML=rash_itog;
+}
+
+
+function Distance()
+{
+	var dist_rashod=document.getElementById('dist_rashod').value.replace(/,/, ".");
+	var dist_topl=document.getElementById('dist_topl').value.replace(/,/, ".");
+	var dist_itog='';
+
+	if (dist_rashod && dist_topl)
+		dist_itog='Вы сможете проехать <b>'+((dist_topl/dist_rashod*100).toString().substring(0,5))+'</b> км.';
+	document.getElementById('dist_itog').innerHTML=dist_itog;
+}
+</script>
+
+<!--Для вывода используем: --------------------------->
+
+<h1 class="mb20">Калькулятор расхода топлива</h1>
+
+<div id="poezdka" class="wd340 fl">
+<form name="form">
+	<div class="tipbl2 pd15">
+		<h2 class="mb5">Стоимость поездки</h2>
+		<div class="mb15">
+			<div>
+				<label for="poezdka_put" class="mb5">Расстояние</label>
+			</div>
+			<div class="wd220 fl">
+				<input type="text" name="poezdka_put" id="poezdka_put" class="wd100pc" value="300">
+			</div>
+			<div class="fl ml10"> км.</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mb15">
+			<div>
+				<label for="poezdka_rashod" class="mb5">Средний расход топлива</label>
+			</div>
+			<div class="wd220 fl">
+				<input type="text" name="poezdka_rashod" id="poezdka_rashod" class="wd100pc" value="12">
+			</div>
+			<div class="fl ml10"> л/100 км.</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mb15">
+			<div>
+				<label for="poezdka_cena" class="mb5">Стоимость 1 л. топлива</label>
+			</div>
+			<div class="wd220 fl">
+				<input type="text" name="poezdka_cena" id="poezdka_cena" class="wd100pc" value="15">
+			</div>
+			<div class="fl ml10"> грн/литр</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mt20 mb20">
+			<button id="raschet" class="fl btn_find font16 pd5_15" type="button" onClick="Poezdka();">Рассчитать</button>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mb15">
+			<div>
+				<label for="poezdka_topliva" class="mb5">Необходимое количество топлива</label>
+			</div>
+			<div class="wd220 fl">
+				<input id="poezdka_topliva" type="text" name="poezdka_topliva" class="wd100pc" value="">
+			</div>
+			<div class="fl ml10"> л.</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mb15">
+			<div>
+				<label for="deneg" class="mb5">Стоимость поездки</label>
+			</div>
+			<div class="wd220 fl">
+				<input id="poezdka_deneg" type="text" name="poezdka_deneg" class="wd100pc" value="">
+			</div>
+			<div class="fl ml10"> грн.</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</form>
+</div>
+
+<div class="wd340 fl ml50">
+<div class="tipbl2 pd15">
+	<h2 class="mb5">Средний расход топлива</h3>
+	<div id="rashod">
+		<div class="mb10">
+			<div>
+				<label for="rash_topl">Я заливаю топлива</label>
+			</div>
+			<div class="wd220 fl">
+				<input id="rash_topl" type="text" name="rash_topl" class="wd100pc" value="">
+			</div>
+			<div class="fl ml10"> л.</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mb10">
+			<div>
+				<label for="rash_km">и проезжаю</label>
+			</div>
+			<div class="wd220 fl">
+				<input id="rash_km" type="text" name="rash_km" class="wd100pc" value="">
+			</div>
+			<div class="fl ml10"> км.</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mt20 mb20">
+			<button id="raschet" class="fl btn_find font16 pd5_15" type="button" onClick="Rashod();">Рассчитать расход</button>
+			<div class="clr"></div>
+		</div>
+
+		<div id="rashod_itog"></div>
+	</div>
+
+	<h2 class="mt30 mb5">Насколько хватит топлива</h3>
+	<div id="distance">
+		<div class="mb10">
+			<div>
+				<label for="dist_rashod">Расход топлива автомобиля</label>
+			</div>
+			<div class="wd220 fl">
+				<input id="dist_rashod" type="text" name="dist_rashod" class="wd100pc" value="">
+			</div>
+			<div class="fl ml10"> л/100 км.</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mb10">
+			<div>
+				<label for="dist_topl">я залил</label>
+			</div>
+			<div class="wd220 fl">
+				<input id="dist_topl" type="text" name="dist_topl" class="wd100pc" value="">
+			</div>
+			<div class="fl ml10"> литров</div>
+			<div class="clr"></div>
+		</div>
+
+		<div class="mt20 mb20">
+			<button id="raschet" class="fl btn_find font16 pd5_15" type="button" onClick="Distance();">Рассчитать расстояние</button>
+			<div class="clr"></div>
+		</div>
+
+		<div id="dist_itog"></div>
+	</div>
+</div>
+</div>
